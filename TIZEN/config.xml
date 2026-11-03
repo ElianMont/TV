@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:tizen="http://tizen.org/ns/widgets"
+        id="https://pelishd4k.com/tv/samsung"
+        version="1.0.0"
+        viewmodes="maximized">
+
+    <tizen:application id="PelisHD4K.TV" package="PelisHD4K" required_version="5.0"/>
+    <name>PelisHD4K TV</name>
+    <content src="index.html"/>
+    <icon src="assets/icon.png"/>
+    <description>PelisHD4K TV para Samsung Smart TV</description>
+
+    <!-- Permisos mínimos: red y mando. Sin acceso a archivos ni dispositivos. -->
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+
+    <!-- Origen del catálogo. Permite leer pelishd4k.com desde la app (sin CORS del navegador). -->
+    <access origin="https://pelishd4k.com" subdomains="true"/>
+
+    <tizen:content-security-policy>default-src 'self' https://pelishd4k.com; img-src 'self' https: data:; media-src https: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src https:</tizen:content-security-policy>
+    <tizen:setting screen-orientation="landscape" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+</widget>

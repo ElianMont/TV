@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PelisHD4K">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0A0F1E">
+<title>PelisHD4K Remote</title>
+<style>
+:root{--bg:#0A0F1E;--surf:#121A30;--surf2:#1B2644;--acc:#2D7BFF;--cyan:#00D1FF;--txt:#E8EEFF;--mut:#8A97B8;--bad:#FF5A6E}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Helvetica,Arial,sans-serif;overscroll-behavior:none}
+body{padding:calc(env(safe-area-inset-top) + 10px) 14px calc(env(safe-area-inset-bottom) + 10px);display:flex;flex-direction:column;max-width:520px;margin:0 auto}
+.hidden{display:none!important}
+button,.btn{font:inherit;color:var(--txt);background:var(--surf2);border:0;border-radius:14px;padding:14px 10px;font-weight:600;font-size:16px;touch-action:manipulation;cursor:pointer}
+button:active,.btn:active,.on{background:var(--acc)}
+button.primary{background:var(--acc)}
+input,textarea{font:inherit;color:var(--txt);background:var(--surf);border:1px solid var(--surf2);border-radius:12px;padding:13px;width:100%;font-size:17px;-webkit-user-select:text;user-select:text;outline:none}
+input:focus,textarea:focus{border-color:var(--cyan)}
+h1{font-size:20px;margin:0;font-weight:600}
+.mut{color:var(--mut);font-size:13px}
+#login{margin:auto 0;text-align:center}
+#login .logo{width:72px;height:72px;border-radius:18px;margin:0 auto 14px;background:linear-gradient(135deg,#2D7BFF,#0B2A8F);display:flex;align-items:center;justify-content:center}
+#login .logo:after{content:"";border-left:26px solid #fff;border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:7px}
+#pin{text-align:center;letter-spacing:.5em;font-size:28px;margin:18px 0 12px}
+#err{color:var(--bad);min-height:20px;margin:6px 0}
+header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+#dot{width:10px;height:10px;border-radius:50%;background:var(--mut);flex:none}
+#dot.ok{background:#3DDC84}#dot.bad{background:var(--bad)}
+#status{font-size:13px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav{display:flex;gap:6px;margin:4px 0 10px}
+nav button{flex:1;padding:10px 4px;font-size:14px;background:var(--surf)}
+.pane{flex:1;display:none;flex-direction:column;gap:10px;min-height:0}
+.pane.act{display:flex}
+#pad{flex:1;min-height:170px;border-radius:20px;background:radial-gradient(circle at 50% 40%,#1B2A55,#0F1730);border:1px solid var(--surf2);display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;touch-action:none}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.row{display:grid;gap:8px}
+.r3{grid-template-columns:repeat(3,1fr)}
+.r2{grid-template-columns:repeat(2,1fr)}
+.big{padding:18px 10px;font-size:20px}
+textarea{min-height:110px;resize:none}
+.footer{margin-top:8px;text-align:center}
+</style>
+</head>
+<body>
+
+<section id="login">
+  <div class="logo"></div>
+  <h1>PelisHD4K TV</h1>
+  <p class="mut">Introduce el PIN de 6 dígitos que aparece en la TV<br>(Configuración → Emparejar iPhone)</p>
+  <input id="pin" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="••••••">
+  <div id="err"></div>
+  <button id="go" class="primary" style="width:100%">Conectar</button>
+</section>
+
+<section id="app" class="hidden" style="display:none;flex-direction:column;flex:1;min-height:0">
+  <header><span id="dot"></span><div style="min-width:0"><h1>Control remoto</h1><div id="status">Conectando…</div></div></header>
+  <nav>
+    <button data-pane="p-control" class="on">Control</button>
+    <button data-pane="p-kb">Teclado</button>
+    <button data-pane="p-search">Buscar</button>
+    <button data-pane="p-open">Abrir</button>
+  </nav>
+
+  <div id="p-control" class="pane act">
+    <div id="pad"><div><b>Touchpad</b><div class="mut">Desliza para mover · toca = OK<br>dos dedos: desplazar · toque con dos dedos = Atrás</div></div></div>
+    <div class="grid3">
+      <span></span><button data-key="UP" data-hold class="big">▲</button><span></span>
+      <button data-key="LEFT" data-hold class="big">◀</button><button data-key="OK" class="big primary">OK</button><button data-key="RIGHT" data-hold class="big">▶</button>
+      <span></span><button data-key="DOWN" data-hold class="big">▼</button><span></span>
+    </div>
+    <div class="row r3">
+      <button data-key="BACK">Atrás</button><button data-key="HOME">Inicio</button><button data-key="MENU">Menú</button>
+    </div>
+    <div class="row r3">
+      <button data-key="REW">⏪</button><button data-key="PLAY_PAUSE">⏯</button><button data-key="FF">⏩</button>
+    </div>
+    <div class="row r3">
+      <button data-vol="down" data-hold>Vol −</button><button data-vol="mute">Silencio</button><button data-vol="up" data-hold>Vol +</button>
+    </div>
+    <div class="row r2">
+      <button data-seek="-10000">−10 s</button><button data-seek="10000">+10 s</button>
+    </div>
+  </div>
+
+  <div id="p-kb" class="pane">
+    <textarea id="kbtext" placeholder="Escribe aquí y pulsa Enviar. Se inserta en el campo activo de la TV."></textarea>
+    <div class="row r2"><button id="kbsend" class="primary">Enviar texto</button><button id="kbclear">Limpiar</button></div>
+    <div class="row r2"><button data-key="BACKSPACE" data-hold>⌫ Borrar</button><button data-key="ENTER">Intro ↵</button></div>
+    <p class="mut">Antes, selecciona el campo de texto en la TV (con el touchpad o el mando).</p>
+  </div>
+
+  <div id="p-search" class="pane">
+    <input id="q" type="search" placeholder="Buscar película o serie" autocapitalize="off" enterkeyhint="search">
+    <button id="qgo" class="primary">Buscar en el sitio</button>
+    <p class="mut">Abre la búsqueda directamente en la TV.</p>
+  </div>
+
+  <div id="p-open" class="pane">
+    <input id="u" type="url" placeholder="https://…" autocapitalize="off" autocorrect="off" enterkeyhint="go">
+    <button id="ugo" class="primary">Abrir en la TV</button>
+    <p class="mut">Una página de un dominio permitido, o un enlace directo https a vídeo (.mp4, .m3u8, .mpd) que tengas derecho a ver.</p>
+  </div>
+
+  <div class="footer mut" id="msg">&nbsp;</div>
+</section>
+
+<script>
+(function(){
+'use strict';
+var token=null;
+try{token=localStorage.getItem('pt');}catch(e){}
+var $=function(id){return document.getElementById(id);};
+var enc=function(o){var a=[];for(var k in o){a.push(encodeURIComponent(k)+'='+encodeURIComponent(o[k]));}return a.join('&');};
+var msgT=null;
+function msg(t,bad){var m=$('msg');m.textContent=t;m.style.color=bad?'#FF5A6E':'';clearTimeout(msgT);msgT=setTimeout(function(){m.innerHTML='&nbsp;';},2500);}
+
+function api(path,params,method){
+  var opt={method:method||'POST',headers:{'X-Token':token||'','Content-Type':'application/x-www-form-urlencoded'}};
+  if(opt.method==='POST'){opt.body=enc(params||{});}
+  return fetch('/api/'+path,opt).then(function(r){
+    if(r.status===401&&path!=='auth'){token=null;try{localStorage.removeItem('pt');}catch(e){}showLogin();}
+    return r;
+  });
+}
+function showLogin(){$('login').classList.remove('hidden');$('app').style.display='none';}
+function showApp(){$('login').classList.add('hidden');$('app').style.display='flex';poll();}
+
+/* ---- Login ---- */
+function login(){
+  var pin=$('pin').value.replace(/\D/g,'');
+  if(pin.length!==6){$('err').textContent='El PIN tiene 6 dígitos';return;}
+  $('err').textContent='';
+  fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:enc({pin:pin})})
+   .then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});})
+   .then(function(x){
+     if(x.s===200){token=x.j.token;try{localStorage.setItem('pt',token);}catch(e){}$('pin').value='';showApp();}
+     else if(x.s===429){$('err').textContent='Demasiados intentos. Espera '+(x.j.retryAfter||30)+' s.';}
+     else{$('err').textContent=x.j.error||'PIN incorrecto';}
+   }).catch(function(){$('err').textContent='No se pudo contactar con la TV';});
+}
+$('go').addEventListener('click',login);
+$('pin').addEventListener('keydown',function(e){if(e.key==='Enter'){login();}});
+
+/* ---- Estado ---- */
+var screens={home:'Inicio',browser:'Navegador',player:'Reproductor',none:'Sin pantalla',busy:'Ocupada'};
+function fmt(ms){ms=Math.max(0,ms/1000|0);var h=ms/3600|0,m=(ms%3600)/60|0,s=ms%60;return (h?h+':'+('0'+m).slice(-2):m)+':'+('0'+s).slice(-2);}
+var pollT=null;
+function poll(){
+  clearTimeout(pollT);
+  if(!token){return;}
+  api('state',null,'GET').then(function(r){return r.json();}).then(function(s){
+    $('dot').className='ok';
+    var t=screens[s.screen]||s.screen;
+    if(s.screen==='player'){t+=' · '+(s.playing?'▶ ':'⏸ ')+fmt(s.positionMs)+' / '+fmt(s.durationMs)+(s.quality?' · '+s.quality:'');}
+    else if(s.title){t+=' · '+s.title;}
+    $('status').textContent=t;
+  }).catch(function(){$('dot').className='bad';$('status').textContent='Sin conexión con la TV';})
+  .then(function(){pollT=setTimeout(poll,1500);});
+}
+
+/* ---- Pestañas ---- */
+var navBtns=document.querySelectorAll('nav button');
+for(var i=0;i<navBtns.length;i++){navBtns[i].addEventListener('click',function(){
+  for(var j=0;j<navBtns.length;j++){navBtns[j].classList.remove('on');}
+  this.classList.add('on');
+  var panes=document.querySelectorAll('.pane');for(var k=0;k<panes.length;k++){panes[k].classList.remove('act');}
+  $(this.getAttribute('data-pane')).classList.add('act');
+});}
+
+/* ---- Botones con repetición al mantener ---- */
+function press(el){
+  var key=el.getAttribute('data-key'),vol=el.getAttribute('data-vol'),seek=el.getAttribute('data-seek');
+  if(key){api('key',{key:key});}
+  else if(vol){api('volume',{action:vol});}
+  else if(seek){api('seek',{ms:seek});}
+  if(navigator.vibrate){navigator.vibrate(8);}
+}
+var btns=document.querySelectorAll('[data-key],[data-vol],[data-seek]');
+Array.prototype.forEach.call(btns,function(el){
+  var t1=null,t2=null,hold=el.hasAttribute('data-hold');
+  function stop(){clearTimeout(t1);clearInterval(t2);}
+  el.addEventListener('pointerdown',function(e){e.preventDefault();press(el);if(hold){t1=setTimeout(function(){t2=setInterval(function(){press(el);},110);},380);}});
+  ['pointerup','pointerleave','pointercancel'].forEach(function(n){el.addEventListener(n,stop);});
+});
+
+/* ---- Touchpad ---- */
+var pad=$('pad'),last=null,moved=0,t0=0,maxTouches=0,ax=0,ay=0,sy=0,busy=false,GAIN=1.7;
+function pt(e){var n=e.touches.length,x=0,y=0;for(var i=0;i<n;i++){x+=e.touches[i].clientX;y+=e.touches[i].clientY;}return {x:x/n,y:y/n};}
+function flush(){
+  if(busy){return;}
+  var dx=Math.round(ax),dy=Math.round(ay),sc=Math.round(sy);
+  if(!dx&&!dy&&!sc){return;}
+  busy=true;ax-=dx;ay-=dy;sy-=sc;
+  var p=sc?api('scroll',{dy:sc}):api('move',{dx:dx,dy:dy});
+  p.then(function(){busy=false;},function(){busy=false;});
+}
+setInterval(flush,35);
+pad.addEventListener('touchstart',function(e){e.preventDefault();maxTouches=Math.max(e.touches.length,maxTouches);last=pt(e);if(e.touches.length===1){moved=0;t0=Date.now();}},{passive:false});
+pad.addEventListener('touchmove',function(e){e.preventDefault();var p=pt(e);var dx=p.x-last.x,dy=p.y-last.y;last=p;moved+=Math.abs(dx)+Math.abs(dy);
+  if(e.touches.length>=2){sy+=dy*1.2;}else{ax+=dx*GAIN;ay+=dy*GAIN;}},{passive:false});
+pad.addEventListener('touchend',function(e){e.preventDefault();
+  if(e.touches.length===0){
+    if(moved<10&&Date.now()-t0<300){api('key',{key:maxTouches>=2?'BACK':'OK'});if(navigator.vibrate){navigator.vibrate(8);}}
+    maxTouches=0;ax=ay=sy=0;
+  } else {last=pt(e);}
+},{passive:false});
+
+/* ---- Teclado / búsqueda / abrir ---- */
+$('kbsend').addEventListener('click',function(){
+  var t=$('kbtext').value;if(!t){return;}
+  api('text',{text:t}).then(function(r){return r.json();}).then(function(j){
+    if(j.ok){$('kbtext').value='';msg('Texto enviado');}else{msg('Selecciona antes un campo de texto en la TV',true);}
+  });
+});
+$('kbclear').addEventListener('click',function(){$('kbtext').value='';});
+function run(path,params,okMsg){
+  api(path,params).then(function(r){return r.json();}).then(function(j){
+    if(j.error){msg(j.error,true);}else{msg(okMsg);}
+  }).catch(function(){msg('No se pudo contactar con la TV',true);});
+}
+function doSearch(){var q=$('q').value.trim();if(q){run('search',{q:q},'Buscando en la TV…');$('q').blur();}}
+$('qgo').addEventListener('click',doSearch);
+$('q').addEventListener('keydown',function(e){if(e.key==='Enter'){doSearch();}});
+function doOpen(){var u=$('u').value.trim();if(u){run('open',{url:u},'Abriendo en la TV…');$('u').blur();}}
+$('ugo').addEventListener('click',doOpen);
+$('u').addEventListener('keydown',function(e){if(e.key==='Enter'){doOpen();}});
+
+/* ---- Arranque ---- */
+if(token){
+  api('state',null,'GET').then(function(r){if(r.status===200){showApp();}else{showLogin();}}).catch(showLogin);
+}else{showLogin();}
+})();
+</script>
+</body>
+</html>

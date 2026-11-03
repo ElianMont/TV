@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PelisHD4K TV</string>
+    <string name="tagline">Cine en tu pantalla grande</string>
+
+    <string name="tab_home">Inicio</string>
+    <string name="tab_movies">Películas</string>
+    <string name="tab_series">Series</string>
+    <string name="tab_trending">Tendencias</string>
+    <string name="tab_favorites">Favoritos</string>
+    <string name="tab_continue">Continuar viendo</string>
+    <string name="tab_search">Buscador</string>
+    <string name="tab_settings">Configuración</string>
+
+    <string name="row_explore">Explorar</string>
+    <string name="row_continue">Continuar viendo</string>
+    <string name="row_favorites">Favoritos</string>
+    <string name="row_history">Historial</string>
+
+    <string name="hero_open_site">Abrir PelisHD4K</string>
+    <string name="hero_continue_fmt">Continuar: %1$s</string>
+    <string name="hero_remote">Control remoto</string>
+
+    <string name="empty_favorites">Aún no tienes favoritos.\nEn el navegador pulsa MENÚ (o mantén OK) y elige «Favorito».</string>
+    <string name="empty_continue">Nada por continuar todavía.</string>
+    <string name="empty_history">El historial está vacío.</string>
+
+    <string name="search_hint">Escribe el título que buscas</string>
+    <string name="search_button">Buscar</string>
+    <string name="search_recent">Búsquedas recientes</string>
+    <string name="search_clear">Borrar búsquedas</string>
+    <string name="search_none">Sin búsquedas recientes.</string>
+
+    <string name="settings_title">Configuración</string>
+    <string name="on">Activado</string>
+    <string name="off">Desactivado</string>
+    <string name="auto">Automática</string>
+    <string name="ok">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close">Cerrar</string>
+    <string name="retry">Reintentar</string>
+    <string name="remove">Quitar</string>
+    <string name="remove_favorite">Quitar de favoritos</string>
+    <string name="remove_history">Quitar del historial</string>
+
+    <string name="tb_back">Atrás</string>
+    <string name="tb_forward">Adelante</string>
+    <string name="tb_reload">Recargar</string>
+    <string name="tb_home">Inicio sitio</string>
+    <string name="tb_favorite">Favorito</string>
+    <string name="tb_player">Reproductor</string>
+    <string name="tb_cursor">Cursor</string>
+    <string name="tb_exit">Salir</string>
+
+    <string name="fav_added">Añadido a favoritos</string>
+    <string name="fav_removed">Quitado de favoritos</string>
+    <string name="player_offer">Fuente directa disponible: MENÚ → Reproductor</string>
+    <string name="player_none">No hay una fuente directa accesible en esta página. Usa el reproductor web.</string>
+    <string name="player_pick">Elige la fuente</string>
+
+    <string name="blocked_title">Dominio no permitido</string>
+    <string name="blocked_msg_fmt">La página quiere abrir «%1$s», que no está en tu lista de dominios permitidos.</string>
+    <string name="blocked_once">Solo esta vez</string>
+    <string name="blocked_always">Permitir siempre</string>
+    <string name="blocked_invalid">Enlace bloqueado: no es una dirección web válida.</string>
+
+    <string name="webview_missing">No se encontró un componente WebView funcional en este dispositivo.</string>
+    <string name="webview_crashed">El visor web se cerró inesperadamente.</string>
+    <string name="load_error_fmt">No se pudo cargar la página (%1$s).</string>
+    <string name="ssl_error">Conexión no segura: el certificado del sitio no es válido. La página no se cargará.</string>
+
+    <string name="audio">Audio</string>
+    <string name="subtitles">Subtítulos</string>
+    <string name="quality">Calidad</string>
+    <string name="speed">Velocidad</string>
+    <string name="player_error_title">No se pudo reproducir</string>
+    <string name="player_error_auth">La fuente rechazó la petición (acceso no autorizado o caducado).</string>
+    <string name="player_error_generic">Error de reproducción: %1$s</string>
+    <string name="resume_fmt">Reanudado en %1$s</string>
+    <string name="open_in_web">Abrir en web</string>
+
+    <string name="remote_title">Control remoto desde el iPhone</string>
+    <string name="remote_steps">1. Conecta el iPhone a la misma red Wi-Fi.\n2. Escanea el código QR con la cámara (o abre la dirección en Safari).\n3. Introduce el PIN que se muestra aquí.</string>
+    <string name="remote_address_fmt">Dirección: %1$s</string>
+    <string name="remote_pin_fmt">PIN: %1$s</string>
+    <string name="remote_off">El servidor de control remoto está desactivado en Configuración.</string>
+    <string name="remote_no_network">No se detectó una red local. Conecta la TV a la misma Wi-Fi o Ethernet.</string>
+    <string name="remote_new_pin">Nuevo PIN</string>
+</resources>

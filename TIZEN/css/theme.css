@@ -1,0 +1,29 @@
+/* Diseño base 1920x1080; en 4K el televisor escala la página. Tokens: SHARED/design/tokens.json */
+:root{--bg:#0A0F1E;--deep:#060914;--surf:#121A30;--high:#1B2644;--acc:#2D7BFF;--accb:#4DA3FF;--cyan:#00D1FF;--txt:#E8EEFF;--mut:#8A97B8}
+*{box-sizing:border-box}
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--txt);font-family:"Roboto","Helvetica Neue",Arial,sans-serif}
+#app{display:flex;width:1920px;height:1080px}
+#side{width:340px;background:var(--deep);padding:60px 28px}
+#side h1{font-size:30px;font-weight:500;margin:0 0 40px 12px}
+#content{flex:1;padding:60px 64px;overflow:hidden;position:relative}
+.tab{height:68px;line-height:68px;padding:0 24px;font-size:28px;color:var(--mut);border-radius:16px;margin-bottom:6px;border:3px solid transparent}
+.tab.sel{color:var(--accb)}
+.focusable.focus{border-color:var(--cyan);background:var(--high);color:var(--txt);transform:scale(1.04)}
+.focusable{transition:transform .12s,background .12s}
+h2{font-size:36px;font-weight:500;margin:0 0 24px}
+.row{display:flex;overflow:hidden;white-space:nowrap;padding:12px 0 24px}
+.card{flex:none;width:240px;margin-right:26px;border-radius:16px;border:3px solid transparent;padding:6px}
+.poster{width:228px;height:342px;border-radius:12px;background:linear-gradient(#1B2644,#0F1730) center/cover no-repeat}
+.card .t{margin-top:10px;font-size:22px;white-space:normal;height:56px;overflow:hidden}
+.btn{display:inline-block;padding:18px 34px;margin-right:16px;border-radius:14px;background:var(--high);font-size:26px;border:3px solid transparent}
+.empty{font-size:28px;color:var(--mut);line-height:1.5;max-width:1100px}
+.hero{height:300px;border-radius:24px;padding:48px;background:linear-gradient(90deg,#1A3A8F,#0F1F52,#0A0F1E);margin-bottom:36px}
+.hero b{font-size:60px;font-weight:300}
+#toast{position:fixed;top:48px;left:50%;transform:translateX(-50%);background:#121A30;border:2px solid var(--acc);padding:16px 36px;border-radius:40px;font-size:26px;z-index:20}
+#playerLayer{position:fixed;left:0;top:0;width:1920px;height:1080px;background:#000;z-index:10}
+#video{width:1920px;height:1080px}
+#pTop{position:absolute;top:0;left:0;right:0;padding:40px 64px;font-size:34px;background:linear-gradient(#CC000000,transparent);display:flex;justify-content:space-between}
+#pBar{position:absolute;left:64px;right:64px;bottom:90px;height:10px;background:#44FFFFFF;border-radius:5px}
+#pFill{height:10px;width:0;background:var(--cyan);border-radius:5px}
+#pTime{position:absolute;left:64px;bottom:40px;font-size:28px}
+#pHint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:56px;background:#99000000;padding:20px 44px;border-radius:20px}
